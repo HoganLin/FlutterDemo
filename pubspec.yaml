@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   get: ^4.5.1
-  camera: ^0.8.1+7
+#  camera: ^0.8.1+7
   logger: ^1.1.0
 
 dev_dependencies:
@@ -66,6 +66,10 @@ flutter:
     - images/flash.png
     - images/flash_auto.png
     - images/flash_off.png
+    - images/page_btn_wenxin_nor.png
+    - images/page_btn_wenxin_pre.png
+    - images/page_btn_zhifubao_nor.png
+    - images/page_btn_zhifubao_pre.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

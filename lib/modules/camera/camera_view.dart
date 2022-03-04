@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
+// import 'package:camera/camera.dart';
 import 'package:get/get.dart';
 import 'package:flutter_demo/modules/camera/camera.dart';
 
@@ -31,10 +31,10 @@ class CameraView extends GetView<MyCameraController> {
         key: controller.cameraKey,
         child: Stack(
           children: [
-            AspectRatio(
-              aspectRatio: controller.aspectRatio,
-              child: Obx(() => _cameraArea()),
-            ),
+            // AspectRatio(
+            //   aspectRatio: controller.aspectRatio,
+            //   child: Obx(() => _cameraArea()),
+            // ),
             Positioned(
               left: 10,
               right: 120,
@@ -62,34 +62,34 @@ class CameraView extends GetView<MyCameraController> {
     );
   }
 
-  Widget _cameraArea() {
-    Widget area;
-    if (controller.takeStatus.value == TakeStatus.confirm) {
-      area = Image.file(
-        File(controller.curFile.path),
-        fit: BoxFit.fitWidth,
-      );
-    } else if (controller.cameraController.value.isInitialized) {
-      final screenWidth = MediaQuery.of(Get.context!).size.width;
-      area = ClipRect(
-        child: OverflowBox(
-            alignment: Alignment.center,
-            child: FittedBox(
-                fit: BoxFit.fitWidth,
-                child: SizedBox(
-                  width: screenWidth,
-                  height: screenWidth *
-                      controller.cameraController.value.aspectRatio,
-                  child: CameraPreview(controller.cameraController),
-                ))),
-      );
-    } else {
-      area = Container(
-        color: Colors.black,
-      );
-    }
-    return area;
-  }
+  // Widget _cameraArea() {
+  //   Widget area;
+  //   if (controller.takeStatus.value == TakeStatus.confirm) {
+  //     area = Image.file(
+  //       File(controller.curFile.path),
+  //       fit: BoxFit.fitWidth,
+  //     );
+  //   } else if (controller.cameraController.value.isInitialized) {
+  //     final screenWidth = MediaQuery.of(Get.context!).size.width;
+  //     area = ClipRect(
+  //       child: OverflowBox(
+  //           alignment: Alignment.center,
+  //           child: FittedBox(
+  //               fit: BoxFit.fitWidth,
+  //               child: SizedBox(
+  //                 width: screenWidth,
+  //                 height: screenWidth *
+  //                     controller.cameraController.value.aspectRatio,
+  //                 child: CameraPreview(controller.cameraController),
+  //               ))),
+  //     );
+  //   } else {
+  //     area = Container(
+  //       color: Colors.black,
+  //     );
+  //   }
+  //   return area;
+  // }
 
   Widget _buildTopBar() {
     return Obx(
@@ -109,15 +109,15 @@ class CameraView extends GetView<MyCameraController> {
                         size: 32,
                       ),
                       onPressed: () => Get.back()),
-                  IconButton(
-                    color: Colors.white,
-                    icon: Image.asset(
-                      controller.flashIcon.value,
-                      width: 32,
-                      height: 32,
-                    ),
-                    onPressed: controller.toggleFlash,
-                  )
+                  // IconButton(
+                  //   color: Colors.white,
+                  //   icon: Image.asset(
+                  //     controller.flashIcon.value,
+                  //     width: 32,
+                  //     height: 32,
+                  //   ),
+                  //   onPressed: controller.toggleFlash,
+                  // )
                 ],
               ),
             ),
@@ -134,18 +134,18 @@ class CameraView extends GetView<MyCameraController> {
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: InkWell(
-                      onTap: controller.cancel,
-                      borderRadius: BorderRadius.circular(25),
-                      child: const Icon(
-                        Icons.close,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                  // SizedBox(
+                  //   width: 50,
+                  //   height: 50,
+                  //   child: InkWell(
+                  //     onTap: controller.cancel,
+                  //     borderRadius: BorderRadius.circular(25),
+                  //     child: const Icon(
+                  //       Icons.close,
+                  //       color: Colors.white,
+                  //     ),
+                  //   ),
+                  // ),
                   SizedBox(
                     width: 50,
                     height: 50,
@@ -163,19 +163,19 @@ class CameraView extends GetView<MyCameraController> {
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: 60,
-                    height: 60,
-                    child: InkWell(
-                      onTap: controller.takePicture,
-                      borderRadius: BorderRadius.circular(30),
-                      child: const Icon(
-                        Icons.camera,
-                        color: Colors.white,
-                        size: 50,
-                      ),
-                    ),
-                  ),
+                  // SizedBox(
+                  //   width: 60,
+                  //   height: 60,
+                  //   child: InkWell(
+                  //     onTap: controller.takePicture,
+                  //     borderRadius: BorderRadius.circular(30),
+                  //     child: const Icon(
+                  //       Icons.camera,
+                  //       color: Colors.white,
+                  //       size: 50,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
       ),

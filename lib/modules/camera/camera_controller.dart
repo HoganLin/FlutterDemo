@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
-import 'package:camera/camera.dart';
+// import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_demo/utils/log_util.dart';
@@ -13,12 +13,12 @@ class MyCameraController extends SuperController {
   late final double pixelRatio;
 
   final GlobalKey cameraKey = GlobalKey();
-  late CameraController cameraController;
+  // late CameraController cameraController;
   final RxString time = "".obs;
   final RxString address = "".obs;
   final RxString flashIcon = "images/flash.png".obs;
   final Rx<TakeStatus> takeStatus = TakeStatus.uninitialized.obs;
-  late XFile curFile;
+  // late XFile curFile;
   late Timer _timer;
   bool _isCapturing = false;
 
@@ -31,86 +31,86 @@ class MyCameraController extends SuperController {
 
     time.value = "time";
     address.value = 'address';
-    await _initCamera();
+    // await _initCamera();
   }
 
-  Future<void> _initCamera() async {
-    try {
-      List cameras = await availableCameras();
-      cameraController = CameraController(
-        cameras.first,
-        ResolutionPreset.high,
-        enableAudio: false,
-        imageFormatGroup: ImageFormatGroup.jpeg,
-      );
-      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-        time.value = DateTime.now().toString();
-      });
-      takeStatus.value = TakeStatus.preparing;
-      cameraController.addListener(() {
-        //添加监听切换图标
-        setFlashIcon();
-      });
-      await cameraController.initialize();
-      takeStatus.value = TakeStatus.taking;
-    } on CameraException catch (e) {
-      debugger(message: e.toString());
-    }
-  }
-
-  // 切换闪光灯
-  void toggleFlash() {
-    if (!cameraController.value.isInitialized) return;
-
-    switch (cameraController.value.flashMode) {
-      case FlashMode.auto:
-        cameraController.setFlashMode(FlashMode.always);
-        break;
-      case FlashMode.off:
-        cameraController.setFlashMode(FlashMode.auto);
-        break;
-      case FlashMode.always:
-      case FlashMode.torch:
-        cameraController.setFlashMode(FlashMode.off);
-        break;
-    }
-  }
-
-  void setFlashIcon() {
-    if (cameraController.value.isInitialized) {
-      Log.v(cameraController.value.flashMode.toString(),
-          tag: "Camera FlashMode");
-      switch (cameraController.value.flashMode) {
-        case FlashMode.auto:
-          flashIcon.value = 'images/flash_auto.png';
-          break;
-        case FlashMode.off:
-          flashIcon.value = 'images/flash_off.png';
-          break;
-        case FlashMode.always:
-        case FlashMode.torch:
-          flashIcon.value = 'images/flash.png';
-          break;
-      }
-    }
-  }
-
-  // 拍照
-  void takePicture() async {
-    if (cameraController.value.isTakingPicture) return;
-    _timer.cancel();
-
-    XFile file = await cameraController.takePicture();
-    curFile = file;
-    takeStatus.value = TakeStatus.confirm;
-  }
-
-  // 取消。重新拍照
-  void cancel() {
-    takeStatus.value = TakeStatus.preparing;
-    cameraController.dispose();
-    _initCamera();
-  }
+  // Future<void> _initCamera() async {
+  //   try {
+  //     List cameras = await availableCameras();
+  //     cameraController = CameraController(
+  //       cameras.first,
+  //       ResolutionPreset.high,
+  //       enableAudio: false,
+  //       imageFormatGroup: ImageFormatGroup.jpeg,
+  //     );
+  //     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+  //       time.value = DateTime.now().toString();
+  //     });
+  //     takeStatus.value = TakeStatus.preparing;
+  //     cameraController.addListener(() {
+  //       //添加监听切换图标
+  //       setFlashIcon();
+  //     });
+  //     await cameraController.initialize();
+  //     takeStatus.value = TakeStatus.taking;
+  //   } on CameraException catch (e) {
+  //     debugger(message: e.toString());
+  //   }
+  // }
+  //
+  // // 切换闪光灯
+  // void toggleFlash() {
+  //   if (!cameraController.value.isInitialized) return;
+  //
+  //   switch (cameraController.value.flashMode) {
+  //     case FlashMode.auto:
+  //       cameraController.setFlashMode(FlashMode.always);
+  //       break;
+  //     case FlashMode.off:
+  //       cameraController.setFlashMode(FlashMode.auto);
+  //       break;
+  //     case FlashMode.always:
+  //     case FlashMode.torch:
+  //       cameraController.setFlashMode(FlashMode.off);
+  //       break;
+  //   }
+  // }
+  //
+  // void setFlashIcon() {
+  //   if (cameraController.value.isInitialized) {
+  //     Log.v(cameraController.value.flashMode.toString(),
+  //         tag: "Camera FlashMode");
+  //     switch (cameraController.value.flashMode) {
+  //       case FlashMode.auto:
+  //         flashIcon.value = 'images/flash_auto.png';
+  //         break;
+  //       case FlashMode.off:
+  //         flashIcon.value = 'images/flash_off.png';
+  //         break;
+  //       case FlashMode.always:
+  //       case FlashMode.torch:
+  //         flashIcon.value = 'images/flash.png';
+  //         break;
+  //     }
+  //   }
+  // }
+  //
+  // // 拍照
+  // void takePicture() async {
+  //   if (cameraController.value.isTakingPicture) return;
+  //   _timer.cancel();
+  //
+  //   XFile file = await cameraController.takePicture();
+  //   curFile = file;
+  //   takeStatus.value = TakeStatus.confirm;
+  // }
+  //
+  // // 取消。重新拍照
+  // void cancel() {
+  //   takeStatus.value = TakeStatus.preparing;
+  //   cameraController.dispose();
+  //   _initCamera();
+  // }
 
   // 确认。返回图片数据
   void confirm() async {
@@ -133,7 +133,7 @@ class MyCameraController extends SuperController {
   @override
   void dispose() {
     super.dispose();
-    cameraController.dispose();
+    // cameraController.dispose();
     _timer.cancel();
   }
 
@@ -142,7 +142,7 @@ class MyCameraController extends SuperController {
 
   @override
   void onInactive() {
-    cameraController.dispose();
+    // cameraController.dispose();
   }
 
   @override
@@ -150,7 +150,7 @@ class MyCameraController extends SuperController {
 
   @override
   void onResumed() {
-    _initCamera();
+    // _initCamera();
   }
 }
 
